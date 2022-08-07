@@ -1,0 +1,32 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Задачи
+{% endblock %}
+
+{% block body %}
+    <h1>Задачи</h1>
+    <p></p>
+    <h3>Добавить задачу</h3>
+    <p></p>
+        <form method = 'post'>
+            {% csrf_token %}
+            {{ form.title }}<br>
+            {{ form.task }}<br>
+            <button type="submit" class="btn btn-success">Добавить</button>
+            <span>{{ error }}</span>
+        </form>
+    <div style="height:50px"></div>
+    <h3>Список задач:</h3>
+    <p></p>
+    {% if tasks %}
+        {% for el in tasks %}
+            <div class = 'alert alert-success mt-2'>
+                <h3>{{ el.title }}</h3>
+                <p>{{ el.task }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>В настоящее время у вас нет поставленных задач!</p>
+    {% endif %}
+{% endblock %}
